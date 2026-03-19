@@ -8,6 +8,7 @@ import logger from 'morgan'
 import indexRouter from './routes/index.js'
 import usersRouter from './routes/users.js'
 import weaponRouter from './routes/dead_space.js'
+import moviesRouter from './routes/movies.js'
 import carsRouter from './routes/cars.js'
 import slonikiRouter from './routes/sloniki.js'
 
@@ -32,6 +33,7 @@ app.use('/', indexRouter);
 app.use('/students', usersRouter);
 app.use('/weapons', weaponRouter);
 app.use('/sloniki', slonikiRouter)
+app.use('/movies', moviesRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
