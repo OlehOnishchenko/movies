@@ -7,12 +7,11 @@ router.get('/', async function(req, res, next) {
   
   const modMovies = moviesData.rows.map(s => {
     return {
-      ...s, 
-      created_at_date: s.created_at.toLocaleDateString()
+      ...s,
     }
   })
 
-  res.render('movies_page', { movies: modMovies || [] });
+  res.render('movies', { movies: modMovies || [] });
 });
 
 export default router;
