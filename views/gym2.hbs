@@ -66,8 +66,8 @@ background: radial-gradient(circle, rgba(99, 99, 99, 1) 0%, rgba(122, 122, 122, 
 <table>
     <thead>
     <tr>
-        {{!-- <th class="naming" scope="col">ID</th> --}}
-        <th style="border-radius: 8px 0 0 0 ;" class="naming" scope="col">Назва вправи</th>
+        <th style="border-radius: 8px 0 0 0 ;" class="naming" scope="col"> ID</th>
+        <th style="border-radius: 0px 0 0 0 ;" class="naming" scope="col">Назва вправи</th>
         <th class="naming" scope="col">Рівень складності</th>
         <th class="naming" scope="col">Рівень підготовки</th>
         <th class="naming" scope="col">Група мязів</th>
@@ -78,7 +78,7 @@ background: radial-gradient(circle, rgba(99, 99, 99, 1) 0%, rgba(122, 122, 122, 
     <tbody>
     {{#each exercise}}
         <tr>
-            {{!-- <th class="typed" scope="row">{{this.id}}</th> --}}
+            <td class="typed">{{this.id}}</td>
             <td class="typed">{{this.exercise_name}}</td>
             <td class="typed">{{this.difficult_level}}</td>
             <td class="typed">{{this.required_level}}</td>
@@ -87,7 +87,7 @@ background: radial-gradient(circle, rgba(99, 99, 99, 1) 0%, rgba(122, 122, 122, 
             <td style="background-color:#F0F0F0;  text-align: center;">
                   <button class="button_del" >
                       <a style="color:#d6d3d3; text-decoration: none; font-family: 'Times New Roman', Times, serif;" href="/gym2/delete/{{this.id}}">Видалити</a>
-                  </button>
+                  </button>   
             </td>
         </tr>
     {{/each}}
@@ -98,3 +98,4 @@ background: radial-gradient(circle, rgba(99, 99, 99, 1) 0%, rgba(122, 122, 122, 
     <a style="color:#d6d3d3; font-family: 'Times New Roman', Times, serif; text-decoration: none;" href="/gym2/addExercise">Додати вправу</a>
     </button>
     </div>
+
