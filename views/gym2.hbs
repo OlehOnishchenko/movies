@@ -23,7 +23,7 @@
         background-image:  #bdc3c7;
        background: #636363;
 background: radial-gradient(circle, rgba(99, 99, 99, 1) 0%, rgba(122, 122, 122, 1) 38%, rgba(219, 215, 215, 1) 100%);
-        height:100vh
+        height:auto; 
     }
     .button_del{
         background-color: #383535;
@@ -54,6 +54,16 @@ background: radial-gradient(circle, rgba(99, 99, 99, 1) 0%, rgba(122, 122, 122, 
         height: auto;
         border-color: #383535;
         border-radius: 8px; 
+    }
+    .button_edit{
+         background-color: #383535;
+        padding: 5px 10px;
+        text-align: center;
+        border-color: #383535;
+        border-radius: 8px; 
+    }
+    .mike{
+        margin-top: 2vh;
     }
 </style>
 <body class="body">
@@ -88,6 +98,9 @@ background: radial-gradient(circle, rgba(99, 99, 99, 1) 0%, rgba(122, 122, 122, 
                   <button class="button_del" >
                       <a style="color:#d6d3d3; text-decoration: none; font-family: 'Times New Roman', Times, serif;" href="/gym2/delete/{{this.id}}">Видалити</a>
                   </button>   
+                  <button class="button_edit">
+                      <a style="color:#d6d3d3; text-decoration: none; font-family: 'Times New Roman', Times, serif;" href="/gym2/edit/{{this.id}}">Змінити</a>
+                  </button>
             </td>
         </tr>
     {{/each}}
@@ -98,4 +111,6 @@ background: radial-gradient(circle, rgba(99, 99, 99, 1) 0%, rgba(122, 122, 122, 
     <a style="color:#d6d3d3; font-family: 'Times New Roman', Times, serif; text-decoration: none;" href="/gym2/addExercise">Додати вправу</a>
     </button>
     </div>
-
+    <div class="mike">
+    <img  src="/images/maniac_mike.png" alt="Maniac Mike" style="width: 1500px; height: 400px;">
+    </div>
