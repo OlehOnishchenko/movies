@@ -37,15 +37,16 @@ export async function deleteHousewife(username, password) {
   }
 }
 
-export async function updateHousewife(currentUsername, password, updateData) {
-  const res = await db.query('SELECT * FROM desperate_housewives_1 WHERE username = $1', [currentUsername]);
+export async function updateHousewife(id, currentUsername, password, updateData) {
+  const res = await db.query('SELECT * FROM desperate_housewives_1 WHERE id = $1', [id]);
+  
   if (res.rows.length === 0) {
     throw new Error('Character not found');
   }
 
   const dhd = res.rows[0];
+
   const isMatch = await bcrypt.compare(password, dhd.password_hash);
-  
   if (!isMatch) {
     throw new Error('Invalid password');
   }
@@ -54,9 +55,8 @@ export async function updateHousewife(currentUsername, password, updateData) {
   const values = [];
   let index = 1;
 
-  // перебираємо поля, які треба змінити і не оновлюємо пусті
   for (const [key, value] of Object.entries(updateData)) {
-    if (value && key !== 'password') { 
+    if (value && value !== '' && key !== 'password') { 
       fields.push(`${key} = $${index}`);
       values.push(value);
       index++;
@@ -67,8 +67,8 @@ export async function updateHousewife(currentUsername, password, updateData) {
     throw new Error('No data provided for update');
   }
 
-  values.push(currentUsername);
-  const query = `UPDATE desperate_housewives_1 SET ${fields.join(', ')} WHERE username = $${index} RETURNING *`;
+  values.push(id);
+  const query = `UPDATE desperate_housewives_1 SET ${fields.join(', ')} WHERE id = $${index} RETURNING *`;
 
   const updateRes = await db.query(query, values);
   return updateRes.rows[0];

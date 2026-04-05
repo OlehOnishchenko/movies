@@ -26,11 +26,9 @@ router.get('/addHousewife', function(req, res) {
 router.post('/addHousewife', async function(req, res) {
   console.log("Submitted data: ", req.body);
 
-  // Оскільки у формі name="password_hash", дістаємо його ПРЯМО
   const { username, password_hash, season, reason, character_notes } = req.body;
 
   try {
-    // Викликаємо функцію з контролера
     await registerHousewife(username, password_hash, season, reason, character_notes);
     res.redirect('/dhd');
   } catch (err) {
@@ -43,8 +41,11 @@ router.post('/addHousewife', async function(req, res) {
 });
 
 
-router.get('/delete', async function(req, res, next) {
-  res.render('forms/dhd/dhd_delete');
+router.get('/delete/:id', async function(req, res, next) {
+  res.render('forms/dhd/dhd_delete', {
+    id: req.params.id,
+    action: `/dhd/delete`
+  });
 })
 
 router.post('/delete', async function(req, res, next) {
@@ -61,5 +62,51 @@ router.post('/delete', async function(req, res, next) {
     }
   }
 });
+
+router.get('/update/:id', async function(req, res) {
+  const id = req.params.id;
+  try {
+    const result = await db.query('SELECT * FROM desperate_housewives_1 WHERE id = $1', [id]);
+    const housewife = result.rows[0];
+
+    if (!housewife) {
+      return res.status(404).send("Персонажа не знайдено");
+    }
+
+    res.render('forms/dhd/dhd_update', { 
+      housewife: housewife,
+      action: `/dhd/update/${id}` 
+    }); 
+  } catch(err) {
+    res.status(500).send("Error (")
+    }
+  });
+
+router.post('/update/:id', async (req, res) => {
+  const id = req.params.id; 
+  
+  const { currentUsername, password, newUsername, newSeason, new_reason, new_notes } = req.body;
+  
+  const updateData = {
+    username: newUsername,
+    season: newSeason ? parseInt(newSeason) : null,
+    reason: new_reason,
+    character_notes: new_notes
+  };
+
+  try {
+    await updateHousewife(id, currentUsername, password, updateData);
+    res.redirect('/dhd');
+  } catch (err) {
+    if (err.message === 'Character not found') {
+      res.status(404).send('Помилка: Персонажа з таким ім’ям не знайдено');
+    } else if (err.message === 'Invalid password') {
+      res.status(403).send('Помилка: Невірний пароль');
+    } else {
+      res.status(500).send('Помилка сервера при оновленні');
+    }
+  }
+});
+
 
 export default router;
