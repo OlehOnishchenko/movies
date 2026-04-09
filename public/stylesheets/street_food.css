@@ -884,3 +884,23 @@ input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
+
+.auth-card {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.auth-actions {
+  align-items: center;
+}
+
+.auth-actions .btn {
+  min-width: 160px;
+}
+
+@media (max-width: 767px) {
+  .auth-actions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
