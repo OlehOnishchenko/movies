@@ -81,7 +81,7 @@ router.post("/update/:id", async (req, res) => {
     const { id } = req.params;
     let { hero_name, hero_class, hero_role, attack_type } = req.body;
 
-        hero_class = hero_class?.toLowerCase() || "";
+    hero_class = hero_class?.toLowerCase() || "";
     attack_type = attack_type?.toLowerCase() || "";
     
 if (!hero_name) {
