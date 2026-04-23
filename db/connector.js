@@ -189,8 +189,7 @@ createTableQueries.push(`
 
 for await (const query of createTableQueries) {
     try {
-        const tableName = query.slice(0, query.indexOf('(')).replace('CREATE TABLE IF NOT EXISTS', '').trim();
-        console.log(`Checking table: ${tableName}...`);
+        console.log(query.slice(0, query.indexOf('(')).trim() + "...")
         await pool.query(query);
     } catch (err) {
         console.error("Query execution error: ", err.message);
