@@ -25,6 +25,10 @@ import batmanRouter from './routes/batman.js'
 import barRouter from './routes/bar.js'
 import accountsRouter from './routes/accounts.js'
 import brawlerRouter from './routes/brawlstars.js';
+import housesRouter from './routes/houses.js';
+import spotifyRouter from './routes/spotify.js';
+import notabugRouter from './routes/notabug.js'
+import kittensRouter from './routes/kittens.js'
 
 import { fileURLToPath } from 'url';
 
@@ -70,17 +74,17 @@ app.use('/bar', barRouter);
 app.use('/accounts', accountsRouter);
 app.use('/brawlers', brawlerRouter);
 
+app.use('/houses', housesRouter);
+app.use('/spotify', spotifyRouter);
+app.use('/notabug', notabugRouter);
+app.use('/kittens', kittensRouter);
+app.use('/president',presidentRouter);
 
 app.use((err, req, res, next) => {
-  // Виводимо повну помилку в термінал VS Code
-  console.error('=== КРИТИЧНА ПОМИЛКА ===');
   console.error(err.stack); 
-  console.error('========================');
-
-  // Виводимо текст помилки в браузер
   res.status(err.status || 500);
   res.render('error', { 
-    message: err.message, // Тут з'явиться причина (наприклад: column "class" does not exist)
+    message: err.message,
     error: err 
   });
 });
