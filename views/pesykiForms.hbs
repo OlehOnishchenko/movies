@@ -18,6 +18,7 @@
   .field { margin-bottom: 1rem; }
   .field label { display: block; font-size: 0.82rem; color: #6b5540; margin-bottom: 5px; }
   .field input, .field select { width: 100%; background: #fff; border: 0.5px solid #c8b9a8; border-radius: 10px; padding: 0.6rem 0.85rem; font-size: 0.92rem; color: #3d2e1e; outline: none; cursor: inherit; }
+  .field input.invalid, .field select.invalid { border-color: #c0392b; }
   .field input:focus, .field select:focus { border-color: #8b6f52; box-shadow: 0 0 0 3px rgba(139,111,82,0.12); }
   .check-row { display: flex; align-items: center; gap: 0.6rem; }
   .check-row input { width: auto; }
@@ -47,17 +48,17 @@
       <form method="POST" action="/pesyki/create">
         <div class="field">
           <label>Імʼя</label>
-          <input type="text" name="name" value="{{name}}" placeholder="Барсик" required />
+          <input type="text" name="name" value="{{name}}" placeholder="Барсик" class="{{#if errorName}}invalid{{/if}}" />
           {{#if errorName}}<div class="error">{{errorName}}</div>{{/if}}
         </div>
         <div class="field">
           <label>Порода</label>
-          <input type="text" name="breed" value="{{breed}}" placeholder="Лабрадор" required />
+          <input type="text" name="breed" value="{{breed}}" placeholder="Лабрадор" class="{{#if errorBreed}}invalid{{/if}}" />
           {{#if errorBreed}}<div class="error">{{errorBreed}}</div>{{/if}}
         </div>
         <div class="field">
           <label>Вік (років)</label>
-          <input type="number" name="age" value="{{age}}" min="0" max="30" placeholder="3" required />
+          <input type="number" name="age" value="{{age}}" min="0" max="30" placeholder="3" class="{{#if errorAge}}invalid{{/if}}" />
           {{#if errorAge}}<div class="error">{{errorAge}}</div>{{/if}}
         </div>
         <div class="field">
@@ -68,7 +69,7 @@
         </div>
         <div class="field">
           <label>Притулок</label>
-          <input type="text" name="shelter" value="{{shelter}}" placeholder="Притулок №1" required />
+          <input type="text" name="shelter" value="{{shelter}}" placeholder="Притулок №1" class="{{#if errorShelter}}invalid{{/if}}" />
           {{#if errorShelter}}<div class="error">{{errorShelter}}</div>{{/if}}
         </div>
         <div class="field">
