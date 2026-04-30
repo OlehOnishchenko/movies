@@ -344,6 +344,21 @@ createTableQueries.push (`
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );`)
 
+createTableQueries.push(`
+    CREATE TABLE IF NOT EXISTS pomidores (
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        variety TEXT,
+        color TEXT,
+        weight_grams INTEGER,
+        sweetness_level INTEGER CHECK (sweetness_level BETWEEN 1 AND 10),
+        is_organic BOOLEAN DEFAULT FALSE,
+        country_of_origin TEXT,
+        price_per_kg NUMERIC(6,2),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+`);
+
 for await (const query of createTableQueries) {
     try {
         console.log(query.slice(0, query.indexOf('(')).trim() + "...")
